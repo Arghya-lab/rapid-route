@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const urlSchema = new mongoose.Schema(
+const urlMappingSchema = new mongoose.Schema(
   {
     ownerId: {
       type: mongoose.Types.ObjectId,
@@ -19,6 +19,6 @@ const urlSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Url = mongoose.model("Url", urlSchema);
+const UrlMapping = mongoose.model("UrlMapping", urlMappingSchema);
 
-module.exports = Url;
+module.exports = UrlMapping;

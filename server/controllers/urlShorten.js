@@ -1,4 +1,4 @@
-const Url = require("../models/Url");
+const UrlMapping = require("../models/UrlMapping");
 const ShortUniqueId = require("short-unique-id");
 
 const generateShortUrl = async (req, res) => {
@@ -7,7 +7,7 @@ const generateShortUrl = async (req, res) => {
     const { url } = req.body;
     const userId = req.userId; //  userId coming from auth middleware
     const shortId = uid.rnd(); // generate 8 char uid
-    await Url.create({ ownerId: userId, shortId, redirectUrl: url });
+    await UrlMapping.create({ ownerId: userId, shortId, redirectUrl: url });
     res.json({ shortId });
   } catch (error) {
     res.status(400).json({ error: "Enter correct data" });
