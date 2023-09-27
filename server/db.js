@@ -1,7 +1,7 @@
-require('dotenv').config()
-const mongoose = require('mongoose');
+require("dotenv").config();
+const mongoose = require("mongoose");
 
-const connectionUri = process.env.MONGO_URI
+const connectionUri = process.env.MONGO_URI;
 
 // Only return documents that match the query criteria exactly.
 mongoose.set("strictQuery", true);
@@ -12,11 +12,11 @@ const options = {
 
 const connectToMongo = async () => {
   try {
-    await mongoose.connect(connectionUri, options)
-    console.log('Connected to MongoDB!');
+    await mongoose.connect(connectionUri, options);
+    console.log("Connected to MongoDB!");
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-module.exports = connectToMongo
+module.exports = connectToMongo;
