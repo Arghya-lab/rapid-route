@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const connectToMongo = require('./db')
-const userRoute = require('./routes/user')
+const authRoute = require('./routes/auth')
 
 /* config */
 const app = express()
@@ -12,7 +12,7 @@ app.use(express.json())
 connectToMongo()
 
 /* Routes */
-app.use("/api/user", userRoute)
+app.use("/api/auth", authRoute)
 
 
 /* start server */
