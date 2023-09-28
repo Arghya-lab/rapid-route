@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const urlMappingSchema = new mongoose.Schema(
+const shortUrlSchema = new mongoose.Schema(
   {
     ownerId: {
       type: mongoose.Types.ObjectId,
@@ -15,10 +15,14 @@ const urlMappingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    analyticIds: {
+      type: [{type: mongoose.Types.ObjectId, ref: "Analytics"}],
+      default: []
+    },
   },
   { timestamps: true }
 );
 
-const UrlMapping = mongoose.model("UrlMapping", urlMappingSchema);
+const ShortUrl = mongoose.model("ShortUrl", shortUrlSchema);
 
-module.exports = UrlMapping;
+module.exports = ShortUrl;

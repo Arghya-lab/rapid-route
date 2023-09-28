@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const analyticsSchema = new mongoose.Schema({
-  ownerId: {
-    type: mongoose.Types.ObjectId,
-    ref: "User",
-  },
   shortId: {
     type: String,
     required: true

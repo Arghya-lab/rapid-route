@@ -4,7 +4,7 @@ const connectToMongo = require("./db");
 const authRoute = require("./routes/auth");
 const urlShortenRoute = require("./routes/urlShorten");
 const redirectToUrlRoute = require("./routes/redirectToUrl");
-const analyticsRoutes = require("./routes/analytics");
+const getAnalyticsRoutes = require("./routes/getAnalytics");
 
 /* config */
 const app = express();
@@ -18,7 +18,7 @@ connectToMongo();
 app.use("/api/auth", authRoute);
 app.use("/api/urlShorten", urlShortenRoute);
 app.use("/", redirectToUrlRoute);
-app.use("/api/analytics", analyticsRoutes);
+app.use("/api/analytics", getAnalyticsRoutes);
 
 
 /* start server */
