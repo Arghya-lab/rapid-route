@@ -1,10 +1,11 @@
 require("dotenv").config();
 const express = require("express");
 const connectToMongo = require("./db");
-const authRoute = require("./routes/auth");
-const urlShortenRoute = require("./routes/urlShorten");
-const redirectToUrlRoute = require("./routes/redirectToUrl");
-const getAnalyticsRoutes = require("./routes/getAnalytics");
+const auth = require("./middleware/auth");
+const { signup, login } = require("./controllers/auth");
+const { generateShortUrl } = require("./controllers/urlShorten");
+const { redirectToUrl } = require('./controllers/redirectToUrl');
+const { analytics } = require("./controllers/analytics");
 
 /* config */
 const app = express();
@@ -14,11 +15,18 @@ app.use(express.json());
 /* connect with db */
 connectToMongo();
 
+
 /* Routes */
-app.use("/api/auth", authRoute);
-app.use("/api/urlShorten", urlShortenRoute);
-app.use("/", redirectToUrlRoute);
-app.use("/api/analytics", getAnalyticsRoutes);
+
+// Auth routs
+app.post("/api/auth/signup", signup);
+app.post("/api/auth/login", login);
+//  generate short URL
+app.post("/api/urlShorten/", auth, generateShortUrl);
+// use shortURL
+app.get("/:shortId", redirectToUrl);
+//  get short URL analytics
+app.post("/api/analytics/", analytics);
 
 
 /* start server */
