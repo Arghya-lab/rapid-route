@@ -18,15 +18,15 @@ connectToMongo();
 
 /* Routes */
 
-// Auth routs
+//  Auth routs
 app.post("/api/auth/signup", signup);
 app.post("/api/auth/login", login);
 //  generate short URL
 app.post("/api/urlShorten/", auth, generateShortUrl);
+//  get short URL analytics
+app.get("/api/analytics/:shortId", auth, analytics);
 // use shortURL
 app.get("/:shortId", redirectToUrl);
-//  get short URL analytics
-app.post("/api/analytics/", analytics);
 
 
 /* start server */

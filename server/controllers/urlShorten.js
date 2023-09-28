@@ -1,4 +1,4 @@
-const UrlMapping = require("../models/shortUrl");
+const UrlMapping = require("../models/ShortUrl");
 const ShortUniqueId = require("short-unique-id");
 
 const generateShortUrl = async (req, res) => {

@@ -1,4 +1,4 @@
-const ShortUrl = require("../models/shortUrl")
+const ShortUrl = require("../models/ShortUrl")
 const Analytics = require("../models/Analytics");
 
 const redirectToUrl = async (req, res) => {
@@ -14,7 +14,6 @@ const redirectToUrl = async (req, res) => {
     res.redirect(redirectUrl)
   } catch (error) {
     res.status(400).send("Some thing went wrong")
-    console.log(error);
   }
 }
 

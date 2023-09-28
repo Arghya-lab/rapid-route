@@ -7,7 +7,6 @@ const analyticsSchema = new mongoose.Schema({
   },
   ipAddress: String,
   userAgent: String,
-  referer: String,
   timestamp: {
     type: Date,
     default: Date.now
