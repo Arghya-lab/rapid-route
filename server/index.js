@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require('cors')
 const connectToMongo = require("./db");
 const auth = require("./middleware/auth");
 const { signup, login } = require("./controllers/auth");
@@ -10,6 +11,7 @@ const { analytics } = require("./controllers/analytics");
 /* config */
 const app = express();
 const port = process.env.PORT;
+app.use(cors())
 app.use(express.json());
 
 /* connect with db */

@@ -7,13 +7,13 @@ const analytics = async (req, res) => {
     const { shortId } = req.params;
     const { ownerId, analyticIds } = await ShortUrl.findOne({shortId})
     if (userId != ownerId) {
-      return res.status(400).json({ error: "You are unauthorize." })
+      return res.status(400).json({ success: false, error: "You are unauthorize." })
     }
     const analytics = await Promise.all(analyticIds.map(async (id)=>{
       const analytic =  await Analytics.findById(id)
       return analytic
     }))
-    res.json(analytics);
+    res.json({success: true, analytics});
   } catch (error) {
 
   }

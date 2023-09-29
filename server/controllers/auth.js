@@ -9,7 +9,7 @@ const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     if (await User.findOne({ email })) {
-      return res.status(400).json({ error: "User already exist." });
+      return res.status(400).json({ success: false, error: "User already exist." });
     }
     bcrypt.genSalt(10, async (err, salt) => {
       bcrypt.hash(password, salt, async (err, hash) => {
@@ -18,11 +18,11 @@ const signup = async (req, res) => {
           { userId: user._id, iat: Math.floor(Date.now() / 1000) - 30 },
           jwtSecret
         );
-        res.status(201).json({ name, email, token });
+        res.status(201).json({ success: true, data: { name, email, token: `Bearer ${token}` }});
       });
     });
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ success: false, error });
   }
 };
 
@@ -31,20 +31,20 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ error: "Invalid credentials." });
+      return res.status(400).json({ success: false, error: "Invalid credentials." });
     }
     bcrypt.compare(password, user.password, function (err, isCorrect) {
       if (err || !isCorrect) {
-        return res.status(400).json({ error: "Invalid credentials." });
+        return res.status(400).json({ success: false, error: "Invalid credentials." });
       }
       const token = jwt.sign(
         { userId: user._id, iat: Math.floor(Date.now() / 1000) - 30 },
         jwtSecret
       );
-      res.status(200).json({ name: user.name, email: user.email, token });
+      res.status(200).json({ success: true, data: { name: user.name, email: user.email, token: `Bearer ${token}` }});
     });
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ success: false, error });
   }
 };
 
