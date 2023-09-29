@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router-dom";
 import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
 import HomePage from "./Pages/HomePage";
@@ -7,9 +8,11 @@ function App() {
   return (
     <div className="flex flex-col h-screen">
       <NavBar />
-      <LoginPage />
-      {/* <HomePage /> */}
-      <Footer />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+        <Footer />
     </div>
   );
 }
