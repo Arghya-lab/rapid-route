@@ -1,17 +1,13 @@
-import SideBar from "../Components/SideBar"
-
+import MainSection from "../Components/MainSection";
+import SideBar from "../Components/SideBar";
 
 function HomePage() {
-  return (<>
-    <div className="flex h-full">
-      <div className="w-full">
-        Hi
+  return (
+      <div className="flex h-full">
+        <MainSection />
+        <SideBar />
       </div>
-      <SideBar />
-    </div>
-    <div className="h-1 w-screen"></div>
-    </>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
