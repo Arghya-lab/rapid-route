@@ -6,6 +6,10 @@ const shortUrlSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "User",
     },
+    name: {
+      type: String,
+      required: true,
+    },
     shortId: {
       type: String,
       required: true,
