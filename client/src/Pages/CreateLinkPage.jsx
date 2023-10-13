@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import SideBar from "../Components/SideBar";
 
 function CreateLinkPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const baseApiUrl = import.meta.env.VITE_BASE_API_URL;
-  const token = localStorage.getItem("token")
-  
+  const token = localStorage.getItem("token");
+
   const [formData, setFormData] = useState({
     destination: "",
     title: "",
   });
-  
+
   const handleFormDataChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -21,25 +21,23 @@ function CreateLinkPage() {
     e.preventDefault();
     const res = await fetch(`${baseApiUrl}/urlShorten`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `${token}` },
-      body: JSON.stringify(
-        { name: formData.title, url: formData.destination  }
-      ),
+      headers: { "Content-Type": "application/json", Authorization: token },
+      body: JSON.stringify({ name: formData.title, url: formData.destination }),
     });
     const json = await res.json();
 
     if (json.success) {
-      navigate("/")
+      navigate("/");
       console.log(`Successfully created ${json.shortId}`);
     } else {
       console.log(json.error);
     }
-  }
-  
+  };
+
   const handleCancel = () => {
-    navigate("/")
+    navigate("/");
     console.log(`Successfully canceled.`);
-  }
+  };
 
   return (
     <div className="flex h-full">
@@ -71,7 +69,10 @@ function CreateLinkPage() {
             />
           </div>
           <div>
-            <button type="button" className="btn btn-wide btn-neutral" onClick={handleCancel}>
+            <button
+              type="button"
+              className="btn btn-wide btn-neutral"
+              onClick={handleCancel}>
               Cancel
             </button>
             <button type="submit" className="btn btn-wide btn-neutral">
