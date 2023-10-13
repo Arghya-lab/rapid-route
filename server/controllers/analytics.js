@@ -15,7 +15,7 @@ const analytics = async (req, res) => {
     }))
     res.json({success: true, analytics});
   } catch (error) {
-
+    res.json({success: false, error})
   }
 };
 
