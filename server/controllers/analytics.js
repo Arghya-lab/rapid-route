@@ -9,11 +9,11 @@ const analytics = async (req, res) => {
     if (userId != ownerId) {
       return res.status(400).json({ success: false, error: "You are unauthorize." })
     }
-    const analytics = await Promise.all(analyticIds.map(async (id)=>{
+    const data = await Promise.all(analyticIds.map(async (id)=>{
       const analytic =  await Analytics.findById(id)
       return analytic
     }))
-    res.json({success: true, analytics});
+    res.json({success: true, data});
   } catch (error) {
     res.json({success: false, error})
   }

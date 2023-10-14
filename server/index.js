@@ -7,7 +7,7 @@ const { signup, login } = require("./controllers/auth");
 const { generateShortUrl } = require("./controllers/urlShorten");
 const { redirectToUrl } = require('./controllers/redirectToUrl');
 const { analytics } = require("./controllers/analytics");
-const { getShortUrls } = require("./controllers/getShortUrls");
+const { getShortUrl, getShortUrls } = require("./controllers/getShortUrls");
 
 /* config */
 const app = express();
@@ -26,6 +26,8 @@ app.post("/api/auth/signup", signup);
 app.post("/api/auth/login", login);
 //  generate short URL
 app.post("/api/urlShorten/", auth, generateShortUrl);
+//  get  shortUrl info
+app.get("/api/url/:shortId", auth, getShortUrl)
 //  get all short url list
 app.get("/api/urls", auth, getShortUrls)
 //  get short URL analytics
