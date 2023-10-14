@@ -8,7 +8,7 @@ import AnalyticsPage from "./Pages/AnalyticsPage";
 
 function App() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="h-screen min-h-[600px]">
       <NavBar />
       <Routes>
         <Route path="/login" element={<LoginPage />} />

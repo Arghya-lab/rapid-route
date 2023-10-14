@@ -40,8 +40,8 @@ function CreateLinkPage() {
   };
 
   return (
-    <div className="flex h-full">
-      <div className="w-full h-full bg-purple-300 p-6 rounded-lg m-1 flex flex-col space-y-8 relative">
+    <div className="flex h-[calc(100%-9.2rem)]">
+      <div className="w-full h-full bg-purple-300 p-6 rounded-lg m-1 flex flex-col space-y-8">
         <h2 className="text-3xl font-bold">Create new</h2>
         <form
           onSubmit={handleSubmit}

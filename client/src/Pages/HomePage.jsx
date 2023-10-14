@@ -3,7 +3,7 @@ import SideBar from "../Components/SideBar";
 
 function HomePage() {
   return (
-      <div className="flex h-full">
+      <div className="flex h-[calc(100%-9.2rem)]">
         <MainSection />
         <SideBar />
       </div>

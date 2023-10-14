@@ -46,7 +46,7 @@ function AnalyticsPage() {
   }, [shortId]);
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-[calc(100%-9.2rem)]">
       <div>
         <div className="p-4">
           <p>{urlInfo.name}</p>

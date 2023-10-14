@@ -1,34 +1,41 @@
-import { useNavigate } from "react-router-dom"
-
+import { useNavigate } from "react-router-dom";
 
 function SideBar() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const name = localStorage.getItem("name")
-  const email = localStorage.getItem("email")
+  const name = localStorage.getItem("name");
+  const email = localStorage.getItem("email");
   // const isAuth = Boolean(localStorage.getItem("token"))
 
-  const handleLogout = () =>{
-      localStorage.removeItem("name", undefined);
-      localStorage.removeItem("email", undefined);
-      localStorage.removeItem("token", undefined);
-      navigate("/login")
-  }
+  const handleLogout = () => {
+    localStorage.removeItem("name", undefined);
+    localStorage.removeItem("email", undefined);
+    localStorage.removeItem("token", undefined);
+    navigate("/login");
+  };
 
   const handleRedirectCreatePage = () => {
-    navigate("/create")
-  }
+    navigate("/create");
+  };
 
   return (
-    <div className="min-w-[280px] max-w-full h-full bg-neutral-content p-6 rounded-lg m-1 flex flex-col space-y-8 relative" >
-      <div className="bg-neutral-focus p-3 rounded-md text-neutral-content">
-        <p className="font-semibold text-xl capitalize font-mono">{name}</p>
-        <p className="">{email}</p>
+    <div className="min-w-[280px] max-w-full h-full bg-neutral-content rounded-lg m-1 p-4 flex flex-col justify-between">
+      <div className=" space-y-6">
+        <div className="bg-neutral-focus p-3 rounded-md text-neutral-content">
+          <p className="font-semibold text-xl capitalize font-mono">{name}</p>
+          <p className="">{email}</p>
+        </div>
+        <button
+          className="btn btn-active btn-primary w-full"
+          onClick={handleRedirectCreatePage}>
+          Create new
+        </button>
       </div>
-      <button className="btn btn-active btn-primary" onClick={handleRedirectCreatePage}>Create new</button>
-      <button className="btn btn-active btn-ghost absolute w-[calc(100%-3rem)] bottom-8" onClick={handleLogout}>Logout</button>
-    </div>
-  )
+        <button className="btn btn-active btn-ghost w-full" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+  );
 }
 
-export default SideBar
+export default SideBar;
