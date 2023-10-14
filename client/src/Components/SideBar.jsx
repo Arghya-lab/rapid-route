@@ -19,7 +19,7 @@ function SideBar() {
   };
 
   return (
-    <div className="min-w-[280px] max-w-full h-full bg-neutral-content rounded-lg m-1 p-4 flex flex-col justify-between">
+    <div className="min-w-[280px] h-full bg-base-200 rounded-lg m-1 p-4 flex flex-col justify-between">
       <div className=" space-y-6">
         <div className="bg-neutral-focus p-3 rounded-md text-neutral-content">
           <p className="font-semibold text-xl capitalize font-mono">{name}</p>
@@ -31,7 +31,7 @@ function SideBar() {
           Create new
         </button>
       </div>
-        <button className="btn btn-active btn-ghost w-full" onClick={handleLogout}>
+        <button className="btn btn-active btn-ghost w-full btn-neutral" onClick={handleLogout}>
           Logout
         </button>
       </div>

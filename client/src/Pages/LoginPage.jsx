@@ -62,12 +62,12 @@ function LoginPage() {
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center mt-12 mb-6 space-y-4">
-        <p className="mb-4 text-3xl font-semibold text-neutral">
+        <p className="mb-4 text-3xl font-semibold text-base-content">
           {isLoginPage ? "Login" : "Signup"}
         </p>
         {isLoginPage ? undefined : (
           <div className="w-full max-w-xl space-y-1">
-            <p className="ml-3 font-semibold text-neutral">Name</p>
+            <p className="ml-3 font-semibold text-base-content">Name</p>
             <input
               type="text"
               placeholder="Name"
@@ -79,7 +79,7 @@ function LoginPage() {
           </div>
         )}
         <div className="w-full max-w-xl space-y-1">
-          <p className="ml-3 font-semibold text-neutral">Email</p>
+          <p className="ml-3 font-semibold text-base-content">Email</p>
           <input
             type="email"
             placeholder="Email"
@@ -90,7 +90,7 @@ function LoginPage() {
           />
         </div>
         <div className="w-full max-w-xl space-y-1">
-          <p className="ml-3 font-semibold text-neutral">Password</p>
+          <p className="ml-3 font-semibold text-base-content">Password</p>
           <input
             type="password"
             placeholder="password"

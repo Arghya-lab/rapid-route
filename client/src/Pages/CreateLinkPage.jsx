@@ -41,13 +41,13 @@ function CreateLinkPage() {
 
   return (
     <div className="flex h-[calc(100%-9.2rem)]">
-      <div className="w-full h-full bg-purple-300 p-6 rounded-lg m-1 flex flex-col space-y-8">
-        <h2 className="text-3xl font-bold">Create new</h2>
+      <div className="w-full h-full bg-base-100 p-6 rounded-lg m-1 flex flex-col space-y-8">
+        <h2 className="text-3xl font-bold text-neutral-content">Create new</h2>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center mt-12 mb-6 space-y-4">
           <div className="w-full max-w-xl space-y-1">
-            <p className="ml-3 font-semibold text-neutral">Title</p>
+            <p className="ml-3 font-semibold text-neutral-content">Title</p>
             <input
               type="text"
               placeholder="Title"
@@ -58,7 +58,7 @@ function CreateLinkPage() {
             />
           </div>
           <div className="w-full max-w-xl space-y-1">
-            <p className="ml-3 font-semibold text-neutral">Destination</p>
+            <p className="ml-3 font-semibold text-neutral-content">Destination</p>
             <input
               type="url"
               placeholder="https://www.example.com/"
@@ -68,14 +68,14 @@ function CreateLinkPage() {
               className="input input-bordered input-primary w-full"
             />
           </div>
-          <div>
+          <div className="space-x-4">
             <button
               type="button"
-              className="btn btn-wide btn-neutral"
+              className="btn btn-wide btn-error"
               onClick={handleCancel}>
               Cancel
             </button>
-            <button type="submit" className="btn btn-wide btn-neutral">
+            <button type="submit" className="btn btn-wide btn-accent">
               Create
             </button>
           </div>

@@ -9,26 +9,26 @@ function ShortUrlWidget({ shortId, name, redirectUrl, createdAt, visited }) {
   }
 
   return (
-    <div className="w-full bg-purple-500 rounded-lg p-4 text-white">
+    <div className="w-full bg-base-200 rounded-lg p-4">
       <div className="p-4">
-        <p>{name}</p>
-        <p>
-          <span className="font-semibold text-neutral">Id:</span> {shortId}
+        <p className="font-bold text-lg text-accent-focus">{name}</p>
+        <p className="text-error-content">
+          <span className="font-semibold text-base-content">Id : </span> {shortId}
         </p>
-        <p>
-          <span className="font-semibold text-neutral">Redirect URL:</span>
+        <p className="text-error-content">
+          <span className="font-semibold text-base-content">Redirect URL : </span>
           {redirectUrl}
         </p>
         <div className="flex justify-between">
-          <p>
-            <span className="font-semibold text-neutral">Total visit:</span>
+          <p className="text-error-content">
+            <span className="font-semibold text-base-content">Total visit : </span>
             {visited}
           </p>
-          <p>{humanReadableDate(createdAt)}</p>
+          <p className="text-error-content">{humanReadableDate(createdAt)}</p>
         </div>
       </div>
       <div className="text-center">
-        <button className="btn btn-wide btn-sm" onClick={handleAnalyticBtnClick}>Analytic</button>
+        <button className="btn btn-wide btn-sm btn-accent" onClick={handleAnalyticBtnClick}>Analytic</button>
       </div>
     </div>
   );

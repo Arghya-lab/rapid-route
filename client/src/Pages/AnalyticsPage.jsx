@@ -47,38 +47,51 @@ function AnalyticsPage() {
 
   return (
     <div className="flex h-[calc(100%-9.2rem)]">
-      <div>
-        <div className="p-4">
-          <p>{urlInfo.name}</p>
-          <p>
-            <span className="font-semibold text-neutral">Id:</span> {shortId}
+      <div className="m-1 w-[calc(100vw-280px)] overflow-y-scroll">
+        <div className="w-full bg-base-200 rounded-lg p-4">
+          <p className="font-bold text-lg text-accent-focus">{urlInfo.name}</p>
+          <p className="text-error-content">
+            <span className="font-semibold text-base-content">Id : </span>{" "}
+            {shortId}
           </p>
-          <p>
-            <span className="font-semibold text-neutral">Redirect URL:</span>
+          <p className="text-error-content">
+            <span className="font-semibold text-base-content">
+              Redirect URL :{" "}
+            </span>
             {urlInfo.redirectUrl}
           </p>
           <div className="flex justify-between">
-            <p>
-              <span className="font-semibold text-neutral">Total visit:</span>
+            <p className="text-error-content">
+              <span className="font-semibold text-base-content">
+                Total visit :{" "}
+              </span>
               {urlInfo.visited}
             </p>
-            {urlInfo.createdAt && <p>{humanReadableDate(urlInfo.createdAt)}</p>}
+            {urlInfo.createdAt && (
+              <p className="text-error-content">
+                {humanReadableDate(urlInfo.createdAt)}
+              </p>
+            )}
           </div>
         </div>
-        <table>
-          <thead>
+        <table className="my-3 w-full bg-base-200 border-collapse">
+          <thead className="bg-base-content text-base-300">
             <tr>
-              <th>ipAddress</th>
-              <th>userAgent</th>
-              <th>time</th>
+              <th className="border-2 p-2 font-semibold text-lg">ipAddress</th>
+              <th className="border-2 p-2 w-2/3 font-semibold text-lg">
+                userAgent
+              </th>
+              <th className="border-2 p-2 font-semibold text-lg">time</th>
             </tr>
           </thead>
           <tbody>
             {data.map((item) => (
               <tr key={item._id}>
-                <td>{item.ipAddress}</td>
-                <td>{item.userAgent}</td>
-                <td>{humanReadableDate(item.timestamp)}</td>
+                <td className="border-2 p-2">{item.ipAddress}</td>
+                <td className="border-2 p-2">{item.userAgent}</td>
+                <td className="border-2 p-2">
+                  {humanReadableDate(item.timestamp)}
+                </td>
               </tr>
             ))}
           </tbody>
