@@ -7,7 +7,6 @@ export default {
   },
   daisyui: {
     themes: ["cupcake", "synthwave"],
-    // themes: ["synthwave"],
   },
   // eslint-disable-next-line no-undef
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
