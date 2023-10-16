@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -58,63 +60,67 @@ function LoginPage() {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center mt-12 mb-6 space-y-4">
-        <p className="mb-4 text-3xl font-semibold text-base-content">
-          {isLoginPage ? "Login" : "Signup"}
-        </p>
-        {isLoginPage ? undefined : (
+    <>
+      <NavBar />
+      <div className="w-full max-w-xl mx-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center mt-12 mb-6 space-y-4">
+          <p className="mb-4 text-3xl font-semibold text-base-content">
+            {isLoginPage ? "Login" : "Signup"}
+          </p>
+          {isLoginPage ? undefined : (
+            <div className="w-full max-w-xl space-y-1">
+              <p className="ml-3 font-semibold text-base-content">Name</p>
+              <input
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={formData.name}
+                onChange={handleFormDataChange}
+                className="input input-bordered input-primary w-full"
+              />
+            </div>
+          )}
           <div className="w-full max-w-xl space-y-1">
-            <p className="ml-3 font-semibold text-base-content">Name</p>
+            <p className="ml-3 font-semibold text-base-content">Email</p>
             <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              value={formData.name}
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={formData.email}
               onChange={handleFormDataChange}
               className="input input-bordered input-primary w-full"
             />
           </div>
-        )}
-        <div className="w-full max-w-xl space-y-1">
-          <p className="ml-3 font-semibold text-base-content">Email</p>
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={formData.email}
-            onChange={handleFormDataChange}
-            className="input input-bordered input-primary w-full"
-          />
+          <div className="w-full max-w-xl space-y-1">
+            <p className="ml-3 font-semibold text-base-content">Password</p>
+            <input
+              type="password"
+              placeholder="password"
+              name="password"
+              value={formData.password}
+              onChange={handleFormDataChange}
+              className="input input-bordered input-primary w-full"
+            />
+          </div>
+          <button type="submit" className="btn btn-wide btn-neutral">
+            {isLoginPage ? "Login" : "signup"}
+          </button>
+        </form>
+        <div className="flex justify-end items-center">
+          <p>
+            {isLoginPage ? "Don’t have an account?" : "Already have account?"}
+          </p>
+          <button
+            onClick={() => setIsLoginPage(!isLoginPage)}
+            className="btn btn-link">
+            {isLoginPage ? "Join Rapid route" : "Login"}
+          </button>
         </div>
-        <div className="w-full max-w-xl space-y-1">
-          <p className="ml-3 font-semibold text-base-content">Password</p>
-          <input
-            type="password"
-            placeholder="password"
-            name="password"
-            value={formData.password}
-            onChange={handleFormDataChange}
-            className="input input-bordered input-primary w-full"
-          />
-        </div>
-        <button type="submit" className="btn btn-wide btn-neutral">
-          {isLoginPage ? "Login" : "signup"}
-        </button>
-      </form>
-      <div className="flex justify-end items-center">
-        <p>
-          {isLoginPage ? "Don’t have an account?" : "Already have account?"}
-        </p>
-        <button
-          onClick={() => setIsLoginPage(!isLoginPage)}
-          className="btn btn-link">
-          {isLoginPage ? "Join Rapid route" : "Login"}
-        </button>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import NavBar from "../Components/NavBar";
 import SideBar from "../Components/SideBar";
 import ShortUrlWidget from "../Components/ShortUrlWidget";
+import Footer from "../Components/Footer";
+import { useEffect, useState } from "react";
 
 function HomePage() {
   const [urls, setUrls] = useState([]);
@@ -25,21 +27,25 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="flex h-[calc(100%-9.2rem)]">
-      <div className="w-full h-full bg-base-100 p-4 rounded-lg m-1 flex flex-col space-y-8 overflow-y-scroll">
-        {urls.map((url) => (
-          <ShortUrlWidget
-            key={url._id}
-            shortId={url.shortId}
-            name={url.name}
-            redirectUrl={url.redirectUrl}
-            createdAt={url.createdAt}
-            visited={url.visited}
-          />
-        ))}
+    <>
+      <NavBar />
+      <div className="flex h-[calc(100%-9.2rem)]">
+        <div className="w-full h-full bg-base-100 p-4 m-1 flex flex-col space-y-8 overflow-y-scroll">
+          {urls.map((url) => (
+            <ShortUrlWidget
+              key={url._id}
+              shortId={url.shortId}
+              name={url.name}
+              redirectUrl={url.redirectUrl}
+              createdAt={url.createdAt}
+              visited={url.visited}
+            />
+          ))}
+        </div>
+        <SideBar />
       </div>
-      <SideBar />
-    </div>
+      <Footer />
+    </>
   );
 }
 
