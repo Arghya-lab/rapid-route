@@ -4,28 +4,44 @@ import humanReadableDate from "../util/convertIsoToHumanReadableDate";
 
 function ShortUrlWidget({ shortId, name, redirectUrl, createdAt, visited }) {
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
   const handleAnalyticBtnClick = () => {
     navigate(`/analytic/#${shortId}`);
+  };
+
+  const handleCopyBtnClick = () => {
+    navigator.clipboard.writeText(`${baseUrl}/${shortId}`);
+    
   };
 
   return (
     <div className="w-full bg-base-200 rounded-lg p-4">
       <div className="p-4">
-        <p className="font-bold text-lg text-accent-focus">{name}</p>
+        <div className="flex justify-between items-center">
+          <p className="font-bold text-lg text-accent-focus">{name}</p>
+          <button
+            className="tooltip"
+            data-tip="Click to copy"
+            onClick={handleCopyBtnClick}>
+            <i className="fa-regular fa-copy"></i>
+          </button>
+          {/* add alert */}
+        </div>
         <p className="text-error-content">
-          <span className="font-semibold text-base-content">Id : </span>{" "}
+          <span className="font-semibold text-base-content">Id : </span>
           {shortId}
         </p>
         <p className="text-error-content">
           <span className="font-semibold text-base-content">
-            Redirect URL :{" "}
+            Redirect URL :
           </span>
           {redirectUrl}
         </p>
         <div className="flex justify-between">
           <p className="text-error-content">
             <span className="font-semibold text-base-content">
-              Total visit :{" "}
+              Total visit :
             </span>
             {visited}
           </p>

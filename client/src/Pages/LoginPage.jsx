@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../Components/NavBar";
-import Footer from "../Components/Footer";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -65,7 +64,7 @@ function LoginPage() {
       <div className="w-full max-w-xl mx-auto">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col items-center mt-12 mb-6 space-y-4">
+          className="flex flex-col items-center mt-32 mb-6 space-y-4">
           <p className="mb-4 text-3xl font-semibold text-base-content">
             {isLoginPage ? "Login" : "Signup"}
           </p>
@@ -119,7 +118,6 @@ function LoginPage() {
           </button>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
