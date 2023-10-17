@@ -4,7 +4,7 @@ const cors = require('cors')
 const connectToMongo = require("./db");
 const auth = require("./middleware/auth");
 const { signup, login } = require("./controllers/auth");
-const { generateShortUrl } = require("./controllers/urlShorten");
+const { generateShortUrl, deleteShortUrl } = require("./controllers/urlShorten");
 const { redirectToUrl } = require('./controllers/redirectToUrl');
 const { analytics } = require("./controllers/analytics");
 const { getShortUrl, getShortUrls } = require("./controllers/getShortUrls");
@@ -25,7 +25,9 @@ connectToMongo();
 app.post("/api/auth/signup", signup);
 app.post("/api/auth/login", login);
 //  generate short URL
-app.post("/api/urlShorten/", auth, generateShortUrl);
+app.post("/api/urlShorten", auth, generateShortUrl);
+//  delete short URL
+app.delete("/api/urlShorten", auth, deleteShortUrl);
 //  get  shortUrl info
 app.get("/api/url/:shortId", auth, getShortUrl)
 //  get all short url list

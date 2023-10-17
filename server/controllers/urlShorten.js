@@ -13,4 +13,22 @@ const generateShortUrl = async (req, res) => {
     res.status(400).json({ success: false, error: "Enter correct data" });
   }
 };
-module.exports = { generateShortUrl };
+
+const deleteShortUrl = async (req, res) => {
+  try {
+    const { shortId } = req.body;
+    const userId = req.userId; //  userId coming from auth middleware
+    const { ownerId } = ShortUrl.findOne({shortId})
+    if (userId === ownerId) {
+      await ShortUrl.deleteOne({shortId})
+      res.status(200).json({ success: true, message: "Successfully deleted." });
+    } else {
+      res.status(400).json({ success: false, error: "Unauthorized" });
+    }
+  } catch (error) {
+    res.status(400).json({ success: false, error: "Unauthorized" });
+  }
+};
+
+
+module.exports = { generateShortUrl, deleteShortUrl };
