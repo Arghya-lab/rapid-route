@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import humanReadableDate from "../util/convertIsoToHumanReadableDate";
+import { toast } from "react-toastify";
 
 function ShortUrlWidget({ shortId, name, redirectUrl, createdAt, visited }) {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function ShortUrlWidget({ shortId, name, redirectUrl, createdAt, visited }) {
 
   const handleCopyBtnClick = () => {
     navigator.clipboard.writeText(`${baseUrl}/${shortId}`);
-    
+    toast.info("Copied");
   };
 
   return (

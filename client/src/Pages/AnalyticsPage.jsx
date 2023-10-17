@@ -49,6 +49,7 @@ function AnalyticsPage() {
 
   return (
     <>
+    {/* delete shorturl */}
       <NavBar />
       <div className="flex h-[calc(100%-9.2rem)]">
         <div className="m-1 w-[calc(100vw-280px)] overflow-y-auto">
@@ -57,19 +58,19 @@ function AnalyticsPage() {
               {urlInfo.name}
             </p>
             <p className="text-error-content">
-              <span className="font-semibold text-base-content">Id : </span>{" "}
+              <span className="font-semibold text-base-content">Id : </span>
               {shortId}
             </p>
             <p className="text-error-content">
               <span className="font-semibold text-base-content">
-                Redirect URL :{" "}
+                Redirect URL : 
               </span>
               {urlInfo.redirectUrl}
             </p>
             <div className="flex justify-between">
               <p className="text-error-content">
                 <span className="font-semibold text-base-content">
-                  Total visit :{" "}
+                  Total visit : 
                 </span>
                 {urlInfo.visited}
               </p>

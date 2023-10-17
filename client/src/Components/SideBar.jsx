@@ -1,17 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SideBar() {
   const navigate = useNavigate();
 
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
-  // const isAuth = Boolean(localStorage.getItem("token"))
 
   const handleLogout = () => {
     localStorage.removeItem("name", undefined);
     localStorage.removeItem("email", undefined);
     localStorage.removeItem("token", undefined);
     navigate("/login");
+    toast.success("Logout successful");
   };
 
   const handleRedirectCreatePage = () => {

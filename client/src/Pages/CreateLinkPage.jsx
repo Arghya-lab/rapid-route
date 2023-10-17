@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SideBar from "../Components/SideBar";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
+import { toast } from "react-toastify";
 
 function CreateLinkPage() {
   const navigate = useNavigate();
@@ -21,18 +22,18 @@ function CreateLinkPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const toastId = toast.loading("Please wait...")
     const res = await fetch(`${baseApiUrl}/urlShorten`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({ name: formData.title, url: formData.destination }),
     });
     const json = await res.json();
-
     if (json.success) {
+      toast.update(toastId, { render: "Successfully created", autoClose: 3000, type: "success", isLoading: false });
       navigate("/");
-      console.log(`Successfully created ${json.shortId}`);
     } else {
-      console.log(json.error);
+      toast.update(toastId, { render: json.error, autoClose: 3000, type: "error", isLoading: false });
     }
   };
 

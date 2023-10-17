@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../Components/NavBar";
+import { toast } from "react-toastify";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const toastId = toast.loading("Please wait...")
     const res = await fetch(isLoginPage ? loginApiUrl : signupApiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -52,9 +54,10 @@ function LoginPage() {
       localStorage.setItem("name", name);
       localStorage.setItem("email", email);
       localStorage.setItem("token", token);
+      toast.update(toastId, { render: "Login successful", autoClose: 3000, type: "success", isLoading: false });
       navigate("/");
     } else {
-      console.log(json.error);
+      toast.update(toastId, { render: json.error, autoClose: 3000, type: "error", isLoading: false });
     }
   };
 
