@@ -18,8 +18,8 @@ const deleteShortUrl = async (req, res) => {
   try {
     const { shortId } = req.body;
     const userId = req.userId; //  userId coming from auth middleware
-    const { ownerId } = ShortUrl.findOne({shortId})
-    if (userId === ownerId) {
+    const { ownerId } = await ShortUrl.findOne({shortId})
+    if (userId == ownerId) {
       await ShortUrl.deleteOne({shortId})
       res.status(200).json({ success: true, message: "Successfully deleted." });
     } else {

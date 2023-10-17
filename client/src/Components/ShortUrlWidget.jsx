@@ -27,7 +27,6 @@ function ShortUrlWidget({ shortId, name, redirectUrl, createdAt, visited }) {
             onClick={handleCopyBtnClick}>
             <i className="fa-regular fa-copy"></i>
           </button>
-          {/* add alert */}
         </div>
         <p className="text-error-content">
           <span className="font-semibold text-base-content">Id : </span>

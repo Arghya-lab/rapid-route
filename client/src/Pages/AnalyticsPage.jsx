@@ -3,13 +3,19 @@ import SideBar from "../Components/SideBar";
 import humanReadableDate from "../util/convertIsoToHumanReadableDate";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function AnalyticsPage() {
+  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
   const [urlInfo, setUrlInfo] = useState({});
   const [shortId, setShortId] = useState("");
+
   const token = localStorage.getItem("token");
   const baseApiUrl = import.meta.env.VITE_BASE_API_URL;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -47,30 +53,80 @@ function AnalyticsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shortId]);
 
+  const handleCopyBtnClick = () => {
+    navigator.clipboard.writeText(`${baseUrl}/${shortId}`);
+    toast.info("Copied");
+  };
+  const handleOpenDeleteModal = () => {
+    document.getElementById("modal").showModal();
+  };
+
+  const handleDeleteBtnClick = async (e) => {
+    e.preventDefault();
+    const toastId = toast.loading("Please wait...");
+    const res = await fetch(`${baseApiUrl}/urlShorten`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", Authorization: token },
+      body: JSON.stringify({ shortId }),
+    });
+    const json = await res.json();
+    if (json.success) {
+      toast.update(toastId, {
+        render: "Successfully deleted",
+        autoClose: 3000,
+        type: "warning",
+        isLoading: false,
+      });
+      navigate("/");
+    } else {
+      toast.update(toastId, {
+        render: json.error,
+        autoClose: 3000,
+        type: "error",
+        isLoading: false,
+      });
+    }
+  };
+
   return (
     <>
-    {/* delete shorturl */}
       <NavBar />
       <div className="flex h-[calc(100%-9.2rem)]">
-        <div className="m-1 w-[calc(100vw-280px)] overflow-y-auto">
+        <div className="w-[calc(100vw-280px)] overflow-y-auto overflow-x-hidden">
           <div className="w-full bg-base-200 rounded-lg p-4">
-            <p className="font-bold text-xl text-accent-focus">
-              {urlInfo.name}
-            </p>
+            <div className="flex justify-between items-center">
+              <p className="font-bold text-xl text-accent-focus">
+                {urlInfo.name}
+              </p>
+              <div className="space-x-3">
+                <button
+                  className="tooltip tooltip-left text-error"
+                  data-tip="Delete shortUrl"
+                  onClick={handleOpenDeleteModal}>
+                  <i className="fa-solid fa-trash"></i>
+                </button>
+                <button
+                  className="tooltip tooltip-left"
+                  data-tip="Click to copy"
+                  onClick={handleCopyBtnClick}>
+                  <i className="fa-regular fa-copy"></i>
+                </button>
+              </div>
+            </div>
             <p className="text-error-content">
               <span className="font-semibold text-base-content">Id : </span>
               {shortId}
             </p>
             <p className="text-error-content">
               <span className="font-semibold text-base-content">
-                Redirect URL : 
+                Redirect URL :
               </span>
               {urlInfo.redirectUrl}
             </p>
             <div className="flex justify-between">
               <p className="text-error-content">
                 <span className="font-semibold text-base-content">
-                  Total visit : 
+                  Total visit :
                 </span>
                 {urlInfo.visited}
               </p>
@@ -112,6 +168,21 @@ function AnalyticsPage() {
             </p>
           )}
         </div>
+        <dialog id="modal" className="modal">
+          <div className="modal-box">
+            <p className="py-4">Do you really want to delete.</p>
+            <div className="modal-action">
+              <form method="dialog" className="space-x-4">
+                <button className="btn btn-success">No</button>
+                <button
+                  className="btn btn-error"
+                  onClick={handleDeleteBtnClick}>
+                  Yes
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
         <SideBar />
       </div>
       <Footer />
