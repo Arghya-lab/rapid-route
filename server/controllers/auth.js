@@ -31,11 +31,11 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ success: false, error: "Invalid credentials." });
+      return res.status(401).json({ success: false, error: "Invalid credentials." });
     }
     bcrypt.compare(password, user.password, function (err, isCorrect) {
       if (err || !isCorrect) {
-        return res.status(400).json({ success: false, error: "Invalid credentials." });
+        return res.status(401).json({ success: false, error: "Invalid credentials." });
       }
       const token = jwt.sign(
         { userId: user._id, iat: Math.floor(Date.now() / 1000) - 30 },

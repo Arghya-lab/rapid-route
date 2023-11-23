@@ -17,4 +17,4 @@ const redirectToUrl = async (req, res) => {
   }
 }
 
-module.exports = { redirectToUrl, }
+module.exports = { redirectToUrl }

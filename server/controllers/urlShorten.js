@@ -23,7 +23,7 @@ const deleteShortUrl = async (req, res) => {
       await ShortUrl.deleteOne({shortId})
       res.status(200).json({ success: true, message: "Successfully deleted." });
     } else {
-      res.status(400).json({ success: false, error: "Unauthorized" });
+      res.status(401).json({ success: false, error: "Unauthorized" });
     }
   } catch (error) {
     res.status(400).json({ success: false, error: "Unauthorized" });
